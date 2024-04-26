@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, ChangeEvent } from 'react'
+import React, { useState, ChangeEvent, FormEvent } from 'react'
 
 const Todo = () => {
 	const [taskData, setTaskData] = useState({ taskName: '', taskBody: '' })
@@ -10,7 +10,7 @@ const Todo = () => {
 	}
 	// console.log("handleChange: ", taskData);
 
-	const handleSubmit = (e: any) => {
+	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault()
 	}
 
