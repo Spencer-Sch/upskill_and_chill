@@ -20,6 +20,7 @@ const Todo = () => {
 		},
 	]
 
+	// Start next stream talking about updated event type
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setTask((prev) => ({ ...prev, taskBody: e.target.value }))
 	}
