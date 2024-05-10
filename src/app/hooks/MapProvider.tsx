@@ -1,23 +1,24 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react'
 
 interface MapContextType {
-	apiKey: string
+	mapApiKey: string
 	updateApiKey: (key: string) => void
 }
 
 const MapContext = createContext<MapContextType | undefined>(undefined)
 
-export const MapProvider: React.FC<{ children: ReactNode }> = ({
-	children,
-}) => {
-	const [apiKey, setApiKey] = useState('')
+export const MapProvider: React.FC<{
+	mapApiKey: string
+	children: ReactNode
+}> = ({ mapApiKey, children }) => {
+	const [apiKey, setApiKey] = useState(mapApiKey)
 
 	const updateApiKey = (newKey: string) => {
 		setApiKey(newKey)
 	}
 
 	return (
-		<MapContext.Provider value={{ apiKey, updateApiKey }}>
+		<MapContext.Provider value={{ mapApiKey, updateApiKey }}>
 			{children}
 		</MapContext.Provider>
 	)

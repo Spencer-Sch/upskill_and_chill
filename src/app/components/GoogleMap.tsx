@@ -2,14 +2,18 @@
 
 import React, { useEffect, useRef } from 'react'
 import { Loader } from '@googlemaps/js-api-loader'
+import { useMapContext } from '../hooks/MapProvider'
+// import Market component
 
 export default function GoogleMap() {
 	const mapRef = useRef<HTMLDivElement>(null)
 
+	const { mapApiKey } = useMapContext()
+
 	useEffect(() => {
 		const initializeMap = async () => {
 			const loader = new Loader({
-				apiKey: process.env.NEXT_PUBLIC_MAPS_API_KEY as string,
+				apiKey: mapApiKey,
 				version: 'quarterly',
 			})
 
@@ -43,9 +47,5 @@ export default function GoogleMap() {
 		initializeMap()
 	}, [])
 
-	return (
-		<div className="h-[600px]" ref={mapRef}>
-			GoogleMap
-		</div>
-	)
+	return <div className="h-[600px]" ref={mapRef} />
 }
