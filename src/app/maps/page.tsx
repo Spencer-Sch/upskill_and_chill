@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, ChangeEvent, FormEvent } from 'react'
+import React from 'react'
 import GoogleMap from '../components/GoogleMap'
 
 const Maps = () => {
