@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef, ReactNode } from 'react'
+import React, { useEffect, useRef, ReactNode, ReactElement } from 'react'
 import { Loader } from '@googlemaps/js-api-loader'
 import { useMapContext } from '../hooks/MapProvider'
 // import Market component
@@ -8,10 +8,11 @@ import { useMapContext } from '../hooks/MapProvider'
 interface Props {
 	zoom: number
 	center: { lat: number; lng: number }
-	// children: ReactNode
+	children?: ReactElement | ReactElement[]
 }
 
-const GoogleMap: React.FC<Props> = ({ zoom, center }) => {
+const GoogleMap: React.FC<Props> = ({ zoom, center, children = [] }) => {
+	console.log('Children: ', children)
 	const mapRef = useRef<HTMLDivElement>(null)
 
 	const { mapApiKey } = useMapContext()
@@ -54,10 +55,21 @@ const GoogleMap: React.FC<Props> = ({ zoom, center }) => {
 			const map = new Map(mapRef.current as HTMLDivElement, options)
 
 			// add marking into the map
-			const marker = new Marker({
-				map: map,
-				position: center,
-			})
+			if (childrenIsArray) {
+				children.forEach((child: ReactNode | null | undefined) => {
+					if (React.isValidElement(child)) {
+						new Marker({
+							map: map,
+							position: child.props.position,
+						})
+					}
+				})
+			} else {
+				new Marker({
+					map: map,
+					position: children.props.position,
+				})
+			}
 		}
 
 		initializeMap()
