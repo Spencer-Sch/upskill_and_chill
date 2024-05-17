@@ -9,7 +9,10 @@ const Maps = () => {
 	// pass to GoogleMap
 	return (
 		<MapProvider mapApiKey={process.env.NEXT_PUBLIC_MAPS_API_KEY as string}>
-			<GoogleMap />
+			<GoogleMap
+				zoom={12}
+				center={{ lat: 44.980553, lng: -93.270035 }}
+			></GoogleMap>
 		</MapProvider>
 	)
 }

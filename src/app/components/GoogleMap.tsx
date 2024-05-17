@@ -1,11 +1,17 @@
 'use client'
 
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, ReactNode } from 'react'
 import { Loader } from '@googlemaps/js-api-loader'
 import { useMapContext } from '../hooks/MapProvider'
 // import Market component
 
-export default function GoogleMap() {
+interface Props {
+	zoom: number
+	center: { lat: number; lng: number }
+	// children: ReactNode
+}
+
+const GoogleMap: React.FC<Props> = ({ zoom, center }) => {
 	const mapRef = useRef<HTMLDivElement>(null)
 
 	const { mapApiKey } = useMapContext()
@@ -19,10 +25,10 @@ export default function GoogleMap() {
 
 			const { Map } = await loader.importLibrary('maps')
 
-			const location = {
-				lat: 44.980553,
-				lng: -93.270035,
-			}
+			// const location = {
+			// 	lat: 44.980553,
+			// 	lng: -93.270035,
+			// }
 
 			// MARKER
 			const { Marker } = (await loader.importLibrary(
@@ -30,8 +36,8 @@ export default function GoogleMap() {
 			)) as google.maps.MarkerLibrary
 
 			const options: google.maps.MapOptions = {
-				center: location,
-				zoom: 12,
+				center: center,
+				zoom: zoom,
 				mapId: 'MASSIVE_MAP_TEST',
 			}
 
@@ -40,7 +46,7 @@ export default function GoogleMap() {
 			// add marking into the map
 			const marker = new Marker({
 				map: map,
-				position: location,
+				position: center,
 			})
 		}
 
@@ -49,3 +55,5 @@ export default function GoogleMap() {
 
 	return <div className="h-[600px]" ref={mapRef} />
 }
+
+export default GoogleMap
