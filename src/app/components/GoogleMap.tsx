@@ -25,10 +25,20 @@ const GoogleMap: React.FC<Props> = ({ zoom, center }) => {
 
 			const { Map } = await loader.importLibrary('maps')
 
-			// const location = {
-			// 	lat: 44.980553,
-			// 	lng: -93.270035,
-			// }
+			const defaultCenter = {
+				lat: 44.980553,
+				lng: -93.270035,
+			}
+
+			const childrenIsArray = Array.isArray(children)
+			const childrenIsNotNull =
+				typeof children === 'object' && children !== null ? true : false
+
+			const center = childrenIsNotNull
+				? childrenIsArray
+					? children[0].props.position
+					: children.props.position
+				: defaultCenter
 
 			// MARKER
 			const { Marker } = (await loader.importLibrary(
