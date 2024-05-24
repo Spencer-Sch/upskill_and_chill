@@ -24,7 +24,6 @@ const Todo = () => {
 		{
 			label: 'Low',
 			value: 1,
-			selected: true,
 		},
 	]
 
@@ -68,13 +67,9 @@ const Todo = () => {
 				/>
 
 				<label htmlFor="priority">Priority</label>
-				<select id="priority">
+				<select id="priority" defaultValue={1}>
 					{priorityOptions.map((item) => (
-						<option
-							key={item.value}
-							value={item.value}
-							selected={item.selected}
-						>
+						<option key={item.value} value={item.value}>
 							{item.label}
 						</option>
 					))}
