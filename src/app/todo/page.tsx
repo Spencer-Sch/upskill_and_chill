@@ -30,7 +30,8 @@ const Todo = () => {
 
 	// Start next stream talking about updated event type
 	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setTask((prev) => ({ ...prev, taskBody: e.target.value }))
+		let value: (typeof task)[keyof typeof task] = e.target.value
+		setTask({ ...task, [e.target.id]: value })
 	}
 
 	const handleSubmit = (e: FormEvent) => {
