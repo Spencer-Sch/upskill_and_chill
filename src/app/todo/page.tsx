@@ -24,6 +24,7 @@ const Todo = () => {
 		{
 			label: 'Low',
 			value: 1,
+			selected: true,
 		},
 	]
 
@@ -49,10 +50,15 @@ const Todo = () => {
 	return (
 		<div>
 			<form onSubmit={handleSubmit}>
-				<label htmlFor="name">Task Name</label>
-				<input name="name" id="name" className="border-[1px]" />
+				<label htmlFor="name">Name</label>
+				<input
+					name="name"
+					id="name"
+					className="border-[1px]"
+					onChange={handleChange}
+				/>
 
-				<label htmlFor="description">Task Description</label>
+				<label htmlFor="description">Description</label>
 				<input
 					name="description"
 					id="description"
@@ -60,10 +66,14 @@ const Todo = () => {
 					onChange={handleChange}
 				/>
 
-				<label htmlFor="priority">Task Description</label>
+				<label htmlFor="priority">Priority</label>
 				<select id="priority">
 					{priorityOptions.map((item) => (
-						<option key={item.value} value={item.value}>
+						<option
+							key={item.value}
+							value={item.value}
+							selected={item.selected}
+						>
 							{item.label}
 						</option>
 					))}
