@@ -10,7 +10,7 @@ const Todo = () => {
 		// deadline:  '',
 		completed: false,
 	})
-	// console.log("handleChange: ", taskData);
+	console.log('handleChange: ', task)
 
 	const priorityOptions = [
 		{
