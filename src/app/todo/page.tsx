@@ -28,7 +28,9 @@ const Todo = () => {
 	]
 
 	// Start next stream talking about updated event type
-	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+	const handleChange = (
+		e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+	) => {
 		let value: (typeof task)[keyof typeof task] = e.target.value
 		setTask({ ...task, [e.target.id]: value })
 	}
