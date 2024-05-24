@@ -69,7 +69,7 @@ const Todo = () => {
 				/>
 
 				<label htmlFor="priority">Priority</label>
-				<select id="priority" defaultValue={1}>
+				<select id="priority" defaultValue={1} onChange={handleChange}>
 					{priorityOptions.map((item) => (
 						<option key={item.value} value={item.value}>
 							{item.label}
