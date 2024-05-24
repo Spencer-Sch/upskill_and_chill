@@ -1,11 +1,18 @@
 'use client'
 
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, ReactNode, ReactElement } from 'react'
 import { Loader } from '@googlemaps/js-api-loader'
 import { useMapContext } from '../hooks/MapProvider'
 // import Market component
 
-export default function GoogleMap() {
+interface Props {
+	zoom: number
+	center: { lat: number; lng: number }
+	children?: ReactElement | ReactElement[]
+}
+
+const GoogleMap: React.FC<Props> = ({ zoom, center, children = [] }) => {
+	console.log('Children: ', children)
 	const mapRef = useRef<HTMLDivElement>(null)
 
 	const { mapApiKey } = useMapContext()
@@ -19,10 +26,20 @@ export default function GoogleMap() {
 
 			const { Map } = await loader.importLibrary('maps')
 
-			const location = {
+			const defaultCenter = {
 				lat: 44.980553,
 				lng: -93.270035,
 			}
+
+			const childrenIsArray = Array.isArray(children)
+			const childrenIsNotNull =
+				typeof children === 'object' && children !== null ? true : false
+
+			const center = childrenIsNotNull
+				? childrenIsArray
+					? children[0].props.position
+					: children.props.position
+				: defaultCenter
 
 			// MARKER
 			const { Marker } = (await loader.importLibrary(
@@ -30,18 +47,29 @@ export default function GoogleMap() {
 			)) as google.maps.MarkerLibrary
 
 			const options: google.maps.MapOptions = {
-				center: location,
-				zoom: 12,
+				center: center,
+				zoom: zoom,
 				mapId: 'MASSIVE_MAP_TEST',
 			}
 
 			const map = new Map(mapRef.current as HTMLDivElement, options)
 
 			// add marking into the map
-			const marker = new Marker({
-				map: map,
-				position: location,
-			})
+			if (childrenIsArray) {
+				children.forEach((child: ReactNode | null | undefined) => {
+					if (React.isValidElement(child)) {
+						new Marker({
+							map: map,
+							position: child.props.position,
+						})
+					}
+				})
+			} else {
+				new Marker({
+					map: map,
+					position: children.props.position,
+				})
+			}
 		}
 
 		initializeMap()
@@ -49,3 +77,5 @@ export default function GoogleMap() {
 
 	return <div className="h-[600px]" ref={mapRef} />
 }
+
+export default GoogleMap
