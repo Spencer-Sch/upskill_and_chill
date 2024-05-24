@@ -2,7 +2,14 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react'
 
 const Todo = () => {
-	const [task, setTask] = useState<Todo>()
+	const [task, setTask] = useState<Todo>({
+		name: '',
+		description: '',
+		priority: 1,
+		createdAt: '',
+		// deadline:  '',
+		completed: false,
+	})
 	// console.log("handleChange: ", taskData);
 
 	const priorityOptions = [
