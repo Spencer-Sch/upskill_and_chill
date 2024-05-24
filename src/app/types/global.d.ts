@@ -1,6 +1,6 @@
 export {}
 declare global {
-	type Todo = {
+	type Task = {
 		name: string
 		description?: string
 		priority: number

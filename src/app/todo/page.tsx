@@ -2,7 +2,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react'
 
 const Todo = () => {
-	const [task, setTask] = useState<Todo>({
+	const [task, setTask] = useState<Task>({
 		name: '',
 		description: '',
 		priority: 1,
