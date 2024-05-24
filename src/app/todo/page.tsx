@@ -39,16 +39,6 @@ const Todo = () => {
 		e.preventDefault()
 	}
 
-	// !!Turn this into a type!!
-	/* Task Shape
-	 * Item Task Name (required) - string
-	 * Description (optional) - string
-	 * Priority Level (optional) - number
-	 * Creation Date (auto) - date (string)
-	 * Due Date/Deadline (optional?) - date (string)
-	 * Completed (default false) - boolean
-	 */
-
 	return (
 		<div>
 			<form onSubmit={handleSubmit}>
