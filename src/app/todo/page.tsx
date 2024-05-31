@@ -2,8 +2,15 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react'
 
 const Todo = () => {
-	const [task, setTask] = useState({ taskName: '', taskBody: '' })
-	// console.log("handleChange: ", taskData);
+	const [task, setTask] = useState<Task>({
+		name: '',
+		description: '',
+		priority: 1,
+		createdAt: '',
+		// deadline:  '',
+		completed: false,
+	})
+	console.log('handleChange: ', task)
 
 	const priorityOptions = [
 		{
@@ -21,31 +28,29 @@ const Todo = () => {
 	]
 
 	// Start next stream talking about updated event type
-	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-		setTask((prev) => ({ ...prev, taskBody: e.target.value }))
+	const handleChange = (
+		e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+	) => {
+		let value: (typeof task)[keyof typeof task] = e.target.value
+		setTask({ ...task, [e.target.id]: value })
 	}
 
 	const handleSubmit = (e: FormEvent) => {
 		e.preventDefault()
 	}
 
-	// !!Turn this into a type!!
-	/* Task Shape
-	 * Item Task Name (required) - string
-	 * Description (optional) - string
-	 * Priority Level (optional) - number
-	 * Creation Date (auto) - date (string)
-	 * Due Date/Deadline (optional?) - date (string)
-	 * Completed (default false) - boolean
-	 */
-
 	return (
 		<div>
 			<form onSubmit={handleSubmit}>
-				<label htmlFor="name">Task Name</label>
-				<input name="name" id="name" className="border-[1px]" />
+				<label htmlFor="name">Name</label>
+				<input
+					name="name"
+					id="name"
+					className="border-[1px]"
+					onChange={handleChange}
+				/>
 
-				<label htmlFor="description">Task Description</label>
+				<label htmlFor="description">Description</label>
 				<input
 					name="description"
 					id="description"
@@ -53,8 +58,8 @@ const Todo = () => {
 					onChange={handleChange}
 				/>
 
-				<label htmlFor="priority">Task Description</label>
-				<select id="priority">
+				<label htmlFor="priority">Priority</label>
+				<select id="priority" defaultValue={1} onChange={handleChange}>
 					{priorityOptions.map((item) => (
 						<option key={item.value} value={item.value}>
 							{item.label}
