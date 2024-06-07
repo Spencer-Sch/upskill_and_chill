@@ -33,6 +33,9 @@ const Todo = () => {
 		e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
 	) => {
 		let value: (typeof task)[keyof typeof task] = e.target.value
+		if (e.target.id === 'priority') {
+			value = Number(value)
+		}
 		setTask({ ...task, [e.target.id]: value })
 	}
 
