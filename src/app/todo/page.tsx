@@ -41,6 +41,19 @@ const Todo = () => {
 
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault()
+		const newTask = task
+		newTask.createdAt = Date.now()
+
+		try {
+			const res = await fetch('/api/task', {
+				method: 'POST',
+				body: JSON.stringify(newTask),
+			})
+
+			console.log('Task created successfully', res)
+		} catch (error) {
+			console.error(error)
+		}
 	}
 
 	return (
