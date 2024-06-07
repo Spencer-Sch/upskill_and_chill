@@ -15,9 +15,9 @@ datasource db {
 
 model Task {
   id          Int     @id @default(autoincrement())
-  name        String
+  taskName    String
   description String?
   priority    Int
-  createdAt   String?
+  createdAt   BigInt
   completed   Boolean
 }
