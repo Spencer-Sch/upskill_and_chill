@@ -39,7 +39,7 @@ const Todo = () => {
 		setTask({ ...task, [e.target.id]: value })
 	}
 
-	const handleSubmit = (e: FormEvent) => {
+	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault()
 	}
 
