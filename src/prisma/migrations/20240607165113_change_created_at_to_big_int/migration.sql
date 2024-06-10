@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Task" ALTER COLUMN "createdAt" SET DATA TYPE BIGINT;
