@@ -3,11 +3,12 @@ import React, { useState, ChangeEvent, FormEvent } from 'react'
 
 const Todo = () => {
 	const [task, setTask] = useState<Task>({
-		name: '',
+		taskName: '',
 		description: '',
 		priority: 1,
-		createdAt: '',
+		createdAt: 0,
 		// deadline:  '',
+		id: Math.floor(Math.random() * 1000),
 		completed: false,
 	})
 	console.log('handleChange: ', task)
@@ -32,20 +33,36 @@ const Todo = () => {
 		e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
 	) => {
 		let value: (typeof task)[keyof typeof task] = e.target.value
+		if (e.target.id === 'priority') {
+			value = Number(value)
+		}
 		setTask({ ...task, [e.target.id]: value })
 	}
 
-	const handleSubmit = (e: FormEvent) => {
+	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault()
+		const newTask = task
+		newTask.createdAt = Date.now()
+
+		try {
+			const res = await fetch('/api/task', {
+				method: 'POST',
+				body: JSON.stringify(newTask),
+			})
+
+			console.log('Task created successfully', res)
+		} catch (error) {
+			console.error(error)
+		}
 	}
 
 	return (
 		<div>
 			<form onSubmit={handleSubmit}>
-				<label htmlFor="name">Name</label>
+				<label htmlFor="taskName">Task</label>
 				<input
-					name="name"
-					id="name"
+					name="taskName"
+					id="taskName"
 					className="border-[1px]"
 					onChange={handleChange}
 				/>
