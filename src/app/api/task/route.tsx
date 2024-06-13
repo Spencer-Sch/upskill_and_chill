@@ -10,6 +10,8 @@ export async function POST(request: NextRequest) {
 	const task = await prisma.task.create({
 		data: {
 			...body,
+			createdAt,
+			id
 		},
 	})
 	return NextResponse.json(task, { status: 201 })
