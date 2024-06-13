@@ -105,6 +105,15 @@ const Todo = () => {
 
 				<button type="submit">Submit</button>
 			</form>
+			<ul>
+				{tasks.map((task: Task) => (
+					<li key={task.id}>
+						<p>Task Name: {task.taskName}</p>
+						<p>Description: {task.description}</p>
+						<p>Priority: {task.priority}</p>
+					</li>
+				))}
+			</ul>
 		</div>
 	)
 }
