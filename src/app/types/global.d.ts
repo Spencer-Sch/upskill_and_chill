@@ -4,9 +4,9 @@ declare global {
 		taskName: string
 		description?: string
 		priority: number
-		createdAt: number
+		createdAt?: number
 		// deadline?: string,
-		id: number
+		id?: number
 		completed: boolean
 	}
 }

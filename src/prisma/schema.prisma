@@ -14,10 +14,10 @@ datasource db {
 }
 
 model Task {
-  id          Int     @id @default(autoincrement())
+  id          String     @id
   taskName    String
   description String?
   priority    Int
-  createdAt   BigInt
+  createdAt   String
   completed   Boolean
 }
