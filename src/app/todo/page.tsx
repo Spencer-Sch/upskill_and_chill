@@ -6,9 +6,9 @@ const Todo = () => {
 		taskName: '',
 		description: '',
 		priority: 1,
-		createdAt: 0,
+		// createdAt: 0,
 		// deadline:  '',
-		id: Math.floor(Math.random() * 1000),
+		// id: Math.floor(Math.random() * 1000),
 		completed: false,
 	})
 	console.log('handleChange: ', task)
@@ -42,7 +42,7 @@ const Todo = () => {
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault()
 		const newTask = task
-		newTask.createdAt = Date.now()
+		// newTask.createdAt = Date.now()
 
 		try {
 			const res = await fetch('/api/task', {
