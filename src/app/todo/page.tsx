@@ -6,9 +6,7 @@ const Todo = () => {
 		taskName: '',
 		description: '',
 		priority: 1,
-		// createdAt: 0,
 		// deadline:  '',
-		// id: Math.floor(Math.random() * 1000),
 		completed: false,
 	})
 	console.log('handleChange: ', task)
