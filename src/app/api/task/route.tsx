@@ -3,6 +3,7 @@ import { prisma } from '@/prisma/client'
 
 export async function POST(request: NextRequest) {
 	const body = await request.json()
+	const createdAt = Date.now().toString()
 	const task = await prisma.task.create({
 		data: {
 			...body,
