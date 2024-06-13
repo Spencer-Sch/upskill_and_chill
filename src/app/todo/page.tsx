@@ -1,17 +1,32 @@
 'use client'
-import React, { useState, ChangeEvent, FormEvent } from 'react'
+import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react'
 
 const Todo = () => {
+	const [tasks, setTasks] = useState<Task[]>([])
 	const [task, setTask] = useState<Task>({
 		taskName: '',
 		description: '',
 		priority: 1,
-		// createdAt: 0,
 		// deadline:  '',
-		// id: Math.floor(Math.random() * 1000),
 		completed: false,
 	})
 	console.log('handleChange: ', task)
+
+	useEffect(() => {
+		getTasks()
+	}, [])
+
+	const getTasks = async () => {
+		try {
+			const res = await fetch('/api/task')
+			const data = await res.json()
+			setTasks(data)
+		} catch (error) {
+			console.error(error)
+		}
+	}
+
+	console.log('Tasks: ', tasks)
 
 	const priorityOptions = [
 		{
@@ -51,6 +66,10 @@ const Todo = () => {
 			})
 
 			console.log('Task created successfully', res)
+
+			if (res.ok) {
+				getTasks()
+			}
 		} catch (error) {
 			console.error(error)
 		}
@@ -86,6 +105,15 @@ const Todo = () => {
 
 				<button type="submit">Submit</button>
 			</form>
+			<ul>
+				{tasks.map((task: Task) => (
+					<li key={task.id}>
+						<p>Task Name: {task.taskName}</p>
+						<p>Description: {task.description}</p>
+						<p>Priority: {task.priority}</p>
+					</li>
+				))}
+			</ul>
 		</div>
 	)
 }
