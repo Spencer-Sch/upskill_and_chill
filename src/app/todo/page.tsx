@@ -76,44 +76,56 @@ const Todo = () => {
 	}
 
 	return (
-		<div>
-			<form onSubmit={handleSubmit}>
-				<label htmlFor="taskName">Task</label>
-				<input
-					name="taskName"
-					id="taskName"
-					className="border-[1px]"
-					onChange={handleChange}
-				/>
-
-				<label htmlFor="description">Description</label>
-				<input
-					name="description"
-					id="description"
-					className="border-[1px]"
-					onChange={handleChange}
-				/>
-
-				<label htmlFor="priority">Priority</label>
-				<select id="priority" defaultValue={1} onChange={handleChange}>
-					{priorityOptions.map((item) => (
-						<option key={item.value} value={item.value}>
-							{item.label}
-						</option>
+		<div className="bg-primary-400 flex space-x-10 w-fit">
+			<div className="p-16">
+				<form onSubmit={handleSubmit} className="flex flex-col space-y-10">
+					<div className="flex flex-col">
+						<label htmlFor="taskName">Task</label>
+						<input
+							name="taskName"
+							id="taskName"
+							className="border-[1px]"
+							onChange={handleChange}
+						/>
+					</div>
+					<div className="flex flex-col">
+						<label htmlFor="description">Description</label>
+						<input
+							name="description"
+							id="description"
+							className="border-[1px]"
+							onChange={handleChange}
+						/>
+					</div>
+					<div className="flex flex-col">
+						<label htmlFor="priority">Priority</label>
+						<select id="priority" defaultValue={1} onChange={handleChange}>
+							{priorityOptions.map((item) => (
+								<option key={item.value} value={item.value}>
+									{item.label}
+								</option>
+							))}
+						</select>
+					</div>
+					<button
+						type="submit"
+						className="hover:bg-secondary-600 py-2 rounded-md bg-secondary-500"
+					>
+						Submit
+					</button>
+				</form>
+			</div>
+			<div className="">
+				<ul>
+					{tasks.map((task: Task) => (
+						<li key={task.id}>
+							<p>Task Name: {task.taskName}</p>
+							<p>Description: {task.description}</p>
+							<p>Priority: {task.priority}</p>
+						</li>
 					))}
-				</select>
-
-				<button type="submit">Submit</button>
-			</form>
-			<ul>
-				{tasks.map((task: Task) => (
-					<li key={task.id}>
-						<p>Task Name: {task.taskName}</p>
-						<p>Description: {task.description}</p>
-						<p>Priority: {task.priority}</p>
-					</li>
-				))}
-			</ul>
+				</ul>
+			</div>
 		</div>
 	)
 }
