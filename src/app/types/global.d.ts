@@ -9,4 +9,8 @@ declare global {
 		id?: string
 		completed: boolean
 	}
+	type PriorityOption = {
+		label: string
+		value: number
+	}
 }
