@@ -101,8 +101,8 @@ const Todo = () => {
 					</button>
 				</form>
 			</div>
-			<div className="">
-				<ul>
+			<div className="p-10">
+				<ul className="space-y-3">
 					{tasks.map((task: Task) => (
 						<li key={task.id}>
 							<p>Task Name: {task.taskName}</p>
