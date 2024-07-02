@@ -1,5 +1,6 @@
 'use client'
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react'
+import Task from '../components/todo/Task'
 import { priorityOptions } from '../constants/todo/constants'
 
 const Todo = () => {
@@ -104,11 +105,7 @@ const Todo = () => {
 			<div className="p-10">
 				<ul className="space-y-3">
 					{tasks.map((task: Task) => (
-						<li key={task.id}>
-							<p>Task Name: {task.taskName}</p>
-							<p>Description: {task.description}</p>
-							<p>Priority: {task.priority}</p>
-						</li>
+						<Task key={task.id} taskData={task} />
 					))}
 				</ul>
 			</div>
