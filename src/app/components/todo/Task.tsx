@@ -1,4 +1,4 @@
-import { priorityOptionsMap } from '@/app/constants/todo/constants'
+import { createPriorityMap } from '@/app/constants/todo/constants'
 
 interface TaskProps {
 	taskData: Task
@@ -7,12 +7,18 @@ interface TaskProps {
 const Task = ({
 	taskData: { taskName, description, id, priority, completed, createdAt },
 }: TaskProps) => {
-	console.log(completed)
+	function getPriority() {
+		// something here should be memoized with useMemo to prevent
+		// recalculated this static object on every render
+		const priorityMap = createPriorityMap()
+		return priorityMap[priority]
+	}
+
 	return (
 		<li className="p-5 bg-lightBlue rounded-md">
 			<h3 className="text-lg font-bold">{taskName}</h3>
 			<p>{description}</p>
-			<p>{priorityOptionsMap[priority]}</p>
+			<p>{getPriority()}</p>
 			{/* <p>{completed.toString()}</p> */}
 			<p>{createdAt}</p>
 		</li>

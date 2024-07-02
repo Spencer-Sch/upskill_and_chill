@@ -13,8 +13,16 @@ export const priorityOptions: PriorityOption[] = [
 	},
 ]
 
-export const priorityOptionsMap: { [key: number]: string } = {
-	1: 'Low',
-	2: 'Medium',
-	3: 'High',
+// export const priorityOptionsMap: { [key: number]: string } = {
+// 	1: 'Low',
+// 	2: 'Medium',
+// 	3: 'High',
+// }
+
+export function createPriorityMap() {
+	const map: { [key: number]: string } = {}
+	priorityOptions.forEach((item: PriorityOption) => {
+		map[item.value] = item.label
+	})
+	return map
 }
