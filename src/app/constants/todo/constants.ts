@@ -1,4 +1,4 @@
-export const priorityOptions = [
+export const priorityOptions: PriorityOption[] = [
 	{
 		label: 'High',
 		value: 3,
