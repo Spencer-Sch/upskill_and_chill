@@ -1,5 +1,7 @@
 'use client'
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react'
+import Task from '../components/todo/Task'
+import { priorityOptions } from '../constants/todo/constants'
 
 const Todo = () => {
 	const [tasks, setTasks] = useState<Task[]>([])
@@ -27,21 +29,6 @@ const Todo = () => {
 	}
 
 	console.log('Tasks: ', tasks)
-
-	const priorityOptions = [
-		{
-			label: 'High',
-			value: 3,
-		},
-		{
-			label: 'Medium',
-			value: 2,
-		},
-		{
-			label: 'Low',
-			value: 1,
-		},
-	]
 
 	// Start next stream talking about updated event type
 	const handleChange = (
@@ -76,8 +63,8 @@ const Todo = () => {
 	}
 
 	return (
-		<div className="bg-primary-400 flex space-x-10 w-fit">
-			<div className="p-16">
+		<div className="bg-primary-400 flex space-x-10 w-fit rounded-md">
+			<div className="p-10">
 				<form onSubmit={handleSubmit} className="flex flex-col space-y-10">
 					<div className="flex flex-col">
 						<label htmlFor="taskName">Task</label>
@@ -115,14 +102,10 @@ const Todo = () => {
 					</button>
 				</form>
 			</div>
-			<div className="">
-				<ul>
+			<div className="p-10">
+				<ul className="space-y-3">
 					{tasks.map((task: Task) => (
-						<li key={task.id}>
-							<p>Task Name: {task.taskName}</p>
-							<p>Description: {task.description}</p>
-							<p>Priority: {task.priority}</p>
-						</li>
+						<Task key={task.id} taskData={task} />
 					))}
 				</ul>
 			</div>
