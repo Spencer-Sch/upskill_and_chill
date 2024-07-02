@@ -62,8 +62,8 @@ const Todo = () => {
 	}
 
 	return (
-		<div className="bg-primary-400 flex space-x-10 w-fit">
-			<div className="p-16">
+		<div className="bg-primary-400 flex space-x-10 w-fit rounded-md">
+			<div className="p-10">
 				<form onSubmit={handleSubmit} className="flex flex-col space-y-10">
 					<div className="flex flex-col">
 						<label htmlFor="taskName">Task</label>
