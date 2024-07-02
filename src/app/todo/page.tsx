@@ -1,5 +1,6 @@
 'use client'
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react'
+import { priorityOptions } from '../constants/todo/constants'
 
 const Todo = () => {
 	const [tasks, setTasks] = useState<Task[]>([])
@@ -27,21 +28,6 @@ const Todo = () => {
 	}
 
 	console.log('Tasks: ', tasks)
-
-	const priorityOptions = [
-		{
-			label: 'High',
-			value: 3,
-		},
-		{
-			label: 'Medium',
-			value: 2,
-		},
-		{
-			label: 'Low',
-			value: 1,
-		},
-	]
 
 	// Start next stream talking about updated event type
 	const handleChange = (
