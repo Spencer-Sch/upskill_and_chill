@@ -1,28 +1,12 @@
-export const priorityOptions: PriorityOption[] = [
-	{
-		label: 'High',
-		value: 3,
-	},
-	{
-		label: 'Medium',
-		value: 2,
-	},
-	{
-		label: 'Low',
-		value: 1,
-	},
-]
+export const priorityMap = new Map([
+	[1, 'Low'],
+	[2, 'Medium'],
+	[3, 'High'],
+]) 
+// here we format data into Map data type
+// I chose a Map because it was easy to convert into 
+// either an array of objects or an object itself
 
-// export const priorityOptionsMap: { [key: number]: string } = {
-// 	1: 'Low',
-// 	2: 'Medium',
-// 	3: 'High',
-// }
-
-export function createPriorityMap() {
-	const map: { [key: number]: string } = {}
-	priorityOptions.forEach((item: PriorityOption) => {
-		map[item.value] = item.label
-	})
-	return map
-}
+export const priorityOptions = Array.from(priorityMap, ([value, label]) => ({ value, label }))
+// This (single line yay!) creates an array of objects with 
+// a value and label like we originally had on the Todo page
