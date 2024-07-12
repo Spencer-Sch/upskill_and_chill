@@ -10,7 +10,6 @@ interface ReqParams {
 export async function GET(
   request: NextRequest,
   { params }: ReqParams) {
-    console.log(params)
     const task = await prisma.task.findUnique({
       where: {
         id: params.id
@@ -18,3 +17,14 @@ export async function GET(
     })
     return NextResponse.json(task, { status: 200 })
 }
+
+export async function DELETE(
+  request: NextRequest,
+  { params }: ReqParams) {
+    const deletedTask = await prisma.task.delete({
+      where: {
+        id: params.id
+      }
+    })
+    return NextResponse.json({ status: 204 })
+  }
