@@ -3,15 +3,17 @@ import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react'
 import Task from '../components/todo/Task'
 import { priorityOptions } from '../constants/todo/constants'
 
+const defaultTask: Task = {
+	taskName: '',
+	description: '',
+	priority: 1,
+	// deadline:  '',
+	completed: false,
+} 
+
 const Todo = () => {
 	const [tasks, setTasks] = useState<Task[]>([])
-	const [task, setTask] = useState<Task>({
-		taskName: '',
-		description: '',
-		priority: 1,
-		// deadline:  '',
-		completed: false,
-	})
+	const [task, setTask] = useState<Task>(defaultTask)
 	console.log('handleChange: ', task)
 
 	useEffect(() => {
@@ -56,6 +58,7 @@ const Todo = () => {
 
 			if (res.ok) {
 				getTasks()
+				setTask(defaultTask)
 			}
 		} catch (error) {
 			console.error(error)
