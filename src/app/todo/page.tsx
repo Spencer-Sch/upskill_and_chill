@@ -91,7 +91,7 @@ const Todo = () => {
 					</div>
 					<div className="flex flex-col">
 						<label htmlFor="priority">Priority</label>
-						<select id="priority" defaultValue={1} value={task.priority} onChange={handleChange}>
+						<select id="priority" value={task.priority} onChange={handleChange}>
 							{priorityOptions.map((item) => (
 								<option key={item.value} value={item.value}>
 									{item.label}
