@@ -3,15 +3,17 @@ import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react'
 import Task from '../components/todo/Task'
 import { priorityOptions } from '../constants/todo/constants'
 
+const defaultTask: Task = {
+	taskName: '',
+	description: '',
+	priority: 1,
+	// deadline:  '',
+	completed: false,
+} 
+
 const Todo = () => {
 	const [tasks, setTasks] = useState<Task[]>([])
-	const [task, setTask] = useState<Task>({
-		taskName: '',
-		description: '',
-		priority: 1,
-		// deadline:  '',
-		completed: false,
-	})
+	const [task, setTask] = useState<Task>(defaultTask)
 	console.log('handleChange: ', task)
 
 	useEffect(() => {
@@ -56,6 +58,7 @@ const Todo = () => {
 
 			if (res.ok) {
 				getTasks()
+				setTask(defaultTask)
 			}
 		} catch (error) {
 			console.error(error)
@@ -71,6 +74,7 @@ const Todo = () => {
 						<input
 							name="taskName"
 							id="taskName"
+							value={task.taskName}
 							className="border-[1px]"
 							onChange={handleChange}
 						/>
@@ -80,13 +84,14 @@ const Todo = () => {
 						<input
 							name="description"
 							id="description"
+							value={task.description}
 							className="border-[1px]"
 							onChange={handleChange}
 						/>
 					</div>
 					<div className="flex flex-col">
 						<label htmlFor="priority">Priority</label>
-						<select id="priority" defaultValue={1} onChange={handleChange}>
+						<select id="priority" value={task.priority} onChange={handleChange}>
 							{priorityOptions.map((item) => (
 								<option key={item.value} value={item.value}>
 									{item.label}
