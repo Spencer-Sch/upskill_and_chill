@@ -30,6 +30,17 @@ const Todo = () => {
 		}
 	}
 
+	const deleteTask = async (id: string) => {
+		try {
+			const res = await fetch(`/api/task/${id}`, { method: 'DELETE' })
+			if (res.ok) {
+				getTasks()
+			}
+		} catch (error) {
+			console.error(error)
+		}
+	}
+
 	console.log('Tasks: ', tasks)
 
 	// Start next stream talking about updated event type
