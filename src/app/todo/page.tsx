@@ -121,7 +121,7 @@ const Todo = () => {
 			<div className="p-10">
 				<ul className="space-y-3">
 					{tasks.map((task: Task) => (
-						<Task key={task.id} taskData={task} />
+						<Task key={task.id} taskData={task} deleteTask={deleteTask} />
 					))}
 				</ul>
 			</div>
