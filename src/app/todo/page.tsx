@@ -9,7 +9,7 @@ const defaultTask: Task = {
 	priority: 1,
 	// deadline:  '',
 	completed: false,
-} 
+}
 
 const Todo = () => {
 	const [tasks, setTasks] = useState<Task[]>([])
