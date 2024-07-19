@@ -26,5 +26,5 @@ export async function DELETE(
         id: params.id
       }
     })
-    return NextResponse.json({ status: 204 })
+    return new Response(null, { status: 204 })
   }
