@@ -2,6 +2,7 @@
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react'
 import Task from '../components/todo/Task'
 import { priorityOptions } from '../constants/todo/constants'
+import TextInput from '../components/todo/TextInput'
 
 const defaultTask: Task = {
 	taskName: '',
@@ -9,7 +10,7 @@ const defaultTask: Task = {
 	priority: 1,
 	// deadline:  '',
 	completed: false,
-} 
+}
 
 const Todo = () => {
 	const [tasks, setTasks] = useState<Task[]>([])
@@ -30,11 +31,22 @@ const Todo = () => {
 		}
 	}
 
+	const deleteTask = async (id: string) => {
+		try {
+			const res = await fetch(`/api/task/${id}`, { method: 'DELETE' })
+			if (res.ok) {
+				getTasks()
+			}
+		} catch (error) {
+			console.error(error)
+		}
+	}
+
 	console.log('Tasks: ', tasks)
 
 	// Start next stream talking about updated event type
 	const handleChange = (
-		e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+		e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
 	) => {
 		let value: (typeof task)[keyof typeof task] = e.target.value
 		if (e.target.id === 'priority') {
@@ -68,27 +80,20 @@ const Todo = () => {
 	return (
 		<div className="bg-primary-400 flex space-x-10 w-fit rounded-md">
 			<div className="p-10">
-				<form onSubmit={handleSubmit} className="flex flex-col space-y-10">
-					<div className="flex flex-col">
-						<label htmlFor="taskName">Task</label>
-						<input
-							name="taskName"
-							id="taskName"
-							value={task.taskName}
-							className="border-[1px]"
-							onChange={handleChange}
-						/>
-					</div>
-					<div className="flex flex-col">
-						<label htmlFor="description">Description</label>
-						<input
-							name="description"
-							id="description"
-							value={task.description}
-							className="border-[1px]"
-							onChange={handleChange}
-						/>
-					</div>
+				<form onSubmit={handleSubmit} className="flex flex-col space-y-5">
+					<TextInput
+						inputName="taskName"
+						label="Task"
+						value={task.taskName}
+						onChangeCallback={handleChange}
+					/>
+					<TextInput
+						inputType="textarea"
+						inputName="description"
+						label="Description"
+						value={task.description ?? ''}
+						onChangeCallback={handleChange}
+					/>
 					<div className="flex flex-col">
 						<label htmlFor="priority">Priority</label>
 						<select id="priority" value={task.priority} onChange={handleChange}>
@@ -110,7 +115,7 @@ const Todo = () => {
 			<div className="p-10">
 				<ul className="space-y-3">
 					{tasks.map((task: Task) => (
-						<Task key={task.id} taskData={task} />
+						<Task key={task.id} taskData={task} deleteTask={deleteTask} />
 					))}
 				</ul>
 			</div>
