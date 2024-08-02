@@ -29,9 +29,9 @@ const config: Config = {
 				500: '#303C6C',
 			},
 			secondary: {
-        500: '#F4976C',
-        600: '#F17941',
-      },
+				500: '#F4976C',
+				600: '#F17941',
+			},
 			tertiary: '#B4DFE5',
 			primaryBg: '#FBE8A6',
 		},
