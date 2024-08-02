@@ -13,6 +13,17 @@ const config: Config = {
 			darkBlue: '#303C6C',
 			lightBlue: '#B4DFE5',
 			white: '#D2FDFF',
+			red: {
+				500: '#EF4444',
+			},
+			yellow: {
+				500: '#F59E0B',
+			},
+			grey: {
+				400: '#A3BDC1',
+				// 500: '#778485',
+				500: '#6B7280',
+			},
 			primary: {
 				400: '#3F4F8D',
 				500: '#303C6C',

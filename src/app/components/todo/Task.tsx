@@ -9,11 +9,20 @@ const Task = ({
 	taskData: { taskName, description, id, priority, completed, createdAt },
 	deleteTask,
 }: TaskProps) => {
+	const getPriorityColor = (priority: number) => {
+		const map: { [key: number]: string } = {
+			3: 'border-red-500',
+			2: 'border-yellow-500',
+			1: 'border-grey-500',
+		}
+		return map[priority]
+	}
 	return (
-		<li className="p-5 bg-lightBlue rounded-md">
+		<li
+			className={`${getPriorityColor(priority)} p-5 bg-lightBlue rounded-md border-l-4 border-solid`}
+		>
 			<h3 className="text-lg font-bold">{taskName}</h3>
 			<p>{description}</p>
-			<p>{priorityMap.get(priority)}</p>
 			{/* <p>{completed.toString()}</p> */}
 			<p>{createdAt}</p>
 				<p className="text-grey-500 italic">
