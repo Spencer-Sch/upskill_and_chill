@@ -25,7 +25,7 @@ const Task = ({
 			<h3 className="text-lg font-bold">{taskName}</h3>
 			<p>{description}</p>
 			{/* <p>{completed.toString()}</p> */}
-			<div className="flex justify-between items-center w-full">
+			<div className="flex justify-between items-center w-full mt-3">
 				<p className="text-grey-500 italic">
 					{format(new Date(Number(createdAt)) ?? '', 'MM/dd/yyyy')}
 				</p>
