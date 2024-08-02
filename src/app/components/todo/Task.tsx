@@ -1,4 +1,4 @@
-import { priorityMap } from '@/app/constants/todo/constants'
+import { format } from 'date-fns'
 
 interface TaskProps {
 	taskData: Task
@@ -16,9 +16,9 @@ const Task = ({
 			<p>{priorityMap.get(priority)}</p>
 			{/* <p>{completed.toString()}</p> */}
 			<p>{createdAt}</p>
-			<button
-				className="hover:bg-secondary-600 py-2 px-5 rounded-md bg-secondary-500"
-				onClick={() => deleteTask(id ?? '')}
+				<p className="text-grey-500 italic">
+					{format(new Date(Number(createdAt)) ?? '', 'MM/dd/yyyy')}
+				</p>
 			>
 				Delete
 			</button>
