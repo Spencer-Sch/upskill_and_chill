@@ -32,6 +32,7 @@ const Task = ({
 				<button
 					className="p-1.5 rounded-md transition-colors duration-200 hover:bg-red-500 hover:bg-opacity-80 hover:text-white"
 					onClick={() => deleteTask(id ?? '')}
+					aria-label="delete task"
 				>
 					<Trash size={17} />
 				</button>
