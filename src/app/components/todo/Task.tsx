@@ -1,4 +1,5 @@
 import { format } from 'date-fns'
+import { Trash } from '@phosphor-icons/react'
 
 interface TaskProps {
 	taskData: Task
@@ -24,13 +25,17 @@ const Task = ({
 			<h3 className="text-lg font-bold">{taskName}</h3>
 			<p>{description}</p>
 			{/* <p>{completed.toString()}</p> */}
-			<p>{createdAt}</p>
+			<div className="flex justify-between items-center w-full">
 				<p className="text-grey-500 italic">
 					{format(new Date(Number(createdAt)) ?? '', 'MM/dd/yyyy')}
 				</p>
-			>
-				Delete
-			</button>
+				<button
+					className="p-1.5 rounded-md hover:bg-primary-500 hover:bg-opacity-10"
+					onClick={() => deleteTask(id ?? '')}
+				>
+					<Trash size={17} />
+				</button>
+			</div>
 		</li>
 	)
 }
