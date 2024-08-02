@@ -30,7 +30,7 @@ const Task = ({
 					{format(new Date(Number(createdAt)) ?? '', 'MM/dd/yyyy')}
 				</p>
 				<button
-					className="p-1.5 rounded-md hover:bg-primary-500 hover:bg-opacity-10"
+					className="p-1.5 rounded-md transition-colors duration-200 hover:bg-red-500 hover:bg-opacity-80 hover:text-white"
 					onClick={() => deleteTask(id ?? '')}
 				>
 					<Trash size={17} />
