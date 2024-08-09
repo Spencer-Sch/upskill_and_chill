@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import { Trash } from '@phosphor-icons/react'
+import Trash from '@/app/components/third-party/trash'
 
 interface TaskProps {
 	taskData: Task

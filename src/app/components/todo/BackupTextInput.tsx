@@ -1,14 +1,13 @@
-'use client'
 import { ChangeEvent } from 'react'
 
 interface TextInputProps {
 	inputName: string
 	label: string
-	value?: string
+	value: string
 	placeholder?: string
 	// styles?: string
 	inputType?: 'text' | 'textarea' | 'password' | 'email'
-	onChangeCallback?: (
+	onChangeCallback: (
 		e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
 	) => void
 }
