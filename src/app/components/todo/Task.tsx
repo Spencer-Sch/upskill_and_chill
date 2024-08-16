@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import Trash from '@/app/components/third-party/trash'
+import { Trash } from '@/app/components/third-party/icons'
 
 interface TaskProps {
 	taskData: Task
@@ -31,7 +31,7 @@ const Task = ({
 				</p>
 				<button
 					className="p-1.5 rounded-md transition-colors duration-200 hover:bg-red-500 hover:bg-opacity-80 hover:text-white"
-					onClick={() => deleteTask(id ?? '')}
+					// onClick={() => deleteTask(id ?? '')}
 					aria-label="delete task"
 				>
 					<Trash size={17} />
