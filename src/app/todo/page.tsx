@@ -1,10 +1,13 @@
-import React, { 
-	// useState, ChangeEvent, FormEvent, useEffect, 
-	Suspense } from 'react'
+import React, {
+	// useState, ChangeEvent, FormEvent, useEffect,
+	Suspense,
+} from 'react'
 import Task from '../components/todo/Task'
 import { priorityOptions } from '../constants/todo/constants'
 import TextInput from '../components/todo/TextInput'
 import { addTask } from '@/app/lib/actions'
+import Button from '../components/todo/Button'
+import { Trash } from '@/app/components/third-party/icons'
 
 const defaultTask: Task = {
 	taskName: '',
@@ -40,6 +43,7 @@ const Todo = async () => {
 
 	const tasks = await getTasks()
 	console.log(tasks)
+
 	const deleteTask = async (id: string) => {
 		'use server'
 		try {
@@ -89,10 +93,11 @@ const Todo = async () => {
 	return (
 		<div className="bg-primary-400 flex space-x-10 w-fit rounded-md">
 			<div className="p-10">
-				<form 
-					// onSubmit={handleSubmit} 
+				<form
+					// onSubmit={handleSubmit}
 					action={addTask}
-					className="flex flex-col space-y-5">
+					className="flex flex-col space-y-5"
+				>
 					<TextInput
 						inputName="taskName"
 						label="Task"
@@ -108,8 +113,10 @@ const Todo = async () => {
 					/>
 					<div className="flex flex-col">
 						<label htmlFor="priority">Priority</label>
-						<select id="priority" name="priority"
-							// value={task.priority} 
+						<select
+							id="priority"
+							name="priority"
+							// value={task.priority}
 							// onChange={handleChange}
 						>
 							{priorityOptions.map((item) => (
@@ -119,12 +126,7 @@ const Todo = async () => {
 							))}
 						</select>
 					</div>
-					<button
-						type="submit"
-						className="hover:bg-secondary-600 py-2 rounded-md bg-secondary-500"
-					>
-						Submit
-					</button>
+					<Button label="Submit" type="submit" />
 				</form>
 			</div>
 			<div className="p-10">
