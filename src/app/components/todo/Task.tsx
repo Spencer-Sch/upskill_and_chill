@@ -1,5 +1,6 @@
 import { format } from 'date-fns'
-import Trash from '@/app/components/third-party/trash'
+import { Trash } from '@/app/components/third-party/icons'
+import IconButton from '@/app/components/todo/IconButton'
 
 interface TaskProps {
 	taskData: Task
@@ -29,13 +30,11 @@ const Task = ({
 				<p className="text-grey-500 italic">
 					{format(new Date(Number(createdAt)) ?? '', 'MM/dd/yyyy')}
 				</p>
-				<button
-					className="p-1.5 rounded-md transition-colors duration-200 hover:bg-red-500 hover:bg-opacity-80 hover:text-white"
+				<IconButton
+					icon={<Trash size={17} />}
+					ariaLabel="delete task"
 					onClick={() => deleteTask(id ?? '')}
-					aria-label="delete task"
-				>
-					<Trash size={17} />
-				</button>
+				/>
 			</div>
 		</li>
 	)
