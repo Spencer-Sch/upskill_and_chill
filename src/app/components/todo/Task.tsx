@@ -33,7 +33,7 @@ const Task = ({
 				<IconButton
 					icon={<Trash size={17} />}
 					ariaLabel="delete task"
-					onClick={() => deleteTask(id ?? '')}
+					onClick={deleteTask}
 				/>
 			</div>
 		</li>
