@@ -1,15 +1,14 @@
 import { format } from 'date-fns'
 import { Trash } from '@/app/components/third-party/icons'
 import IconButton from '@/app/components/todo/IconButton'
+import { deleteTask } from '@/app/lib/actions'
 
 interface TaskProps {
 	taskData: Task
-	deleteTask: (id: string) => void
 }
 
 const Task = ({
 	taskData: { taskName, description, id, priority, completed, createdAt },
-	deleteTask,
 }: TaskProps) => {
 	const getPriorityColor = (priority: number) => {
 		const map: { [key: number]: string } = {
@@ -25,16 +24,14 @@ const Task = ({
 		>
 			<h3 className="text-lg font-bold">{taskName}</h3>
 			<p>{description}</p>
-			{/* <p>{completed.toString()}</p> */}
 			<div className="flex justify-between items-center w-full mt-3">
 				<p className="text-grey-500 italic">
 					{format(new Date(Number(createdAt)) ?? '', 'MM/dd/yyyy')}
 				</p>
-				<IconButton
-					icon={<Trash size={17} />}
-					ariaLabel="delete task"
-					onClick={deleteTask}
-				/>
+				<form action={deleteTask}>
+					<input hidden defaultValue={id ?? ''} name="taskId" />
+					<IconButton icon={<Trash size={17} />} ariaLabel="delete task" />
+				</form>
 			</div>
 		</li>
 	)

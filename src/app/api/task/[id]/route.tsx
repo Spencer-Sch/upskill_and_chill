@@ -26,5 +26,6 @@ export async function DELETE(
         id: params.id
       }
     })
+    console.log(deletedTask)
     return new Response(null, { status: 204 })
   }
