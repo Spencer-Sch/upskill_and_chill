@@ -11,6 +11,14 @@ export const addTask = async (formData: FormData) => {
       completed: false
     })
   }).then(res => res.json())
-  console.log(data)
+  // console.log(data)
+  revalidatePath('/todo')
+}
+
+export const deleteTask = async (formData: FormData) => {
+  const id = formData.get('taskId') ?? ''
+  const res = await fetch(`http://localhost:3000/api/task/${id}`, { 
+    method: 'DELETE', 
+  })
   revalidatePath('/todo')
 }

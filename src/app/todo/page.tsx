@@ -31,9 +31,9 @@ const Todo = async () => {
 		try {
 			console.log('get tasks')
 			const res = await fetch('http://localhost:3000/api/task')
-			console.log('==res==', res)
+			// console.log('==res==', res)
 			const data = await res.json()
-			console.log('==data==', data)
+			// console.log('==data==', data)
 			// setTasks(data)
 			return data
 		} catch (error) {
@@ -42,19 +42,19 @@ const Todo = async () => {
 	}
 
 	const tasks = await getTasks()
-	console.log(tasks)
+	// console.log(tasks)
 
-	const deleteTask = async (id: string) => {
-		'use server'
-		try {
-			const res = await fetch(`/api/task/${id}`, { method: 'DELETE' })
-			if (res.ok) {
-				getTasks()
-			}
-		} catch (error) {
-			console.error(error)
-		}
-	}
+	// const deleteTask = async (id: string) => {
+	// 	'use server'
+	// 	try {
+	// 		const res = await fetch(`/api/task/${id}`, { method: 'DELETE' })
+	// 		if (res.ok) {
+	// 			getTasks()
+	// 		}
+	// 	} catch (error) {
+	// 		console.error(error)
+	// 	}
+	// }
 
 	// console.log('Tasks: ', tasks)
 	// Start next stream talking about updated event type
@@ -133,7 +133,9 @@ const Todo = async () => {
 				<ul className="space-y-3">
 					<Suspense fallback={<div>Loading...</div>}>
 						{tasks.map((task: Task) => (
-							<Task key={task.id} taskData={task} deleteTask={deleteTask} />
+							<Task key={task.id} taskData={task} 
+							// deleteTask={deleteTask} 
+							/>
 						))}
 					</Suspense>
 				</ul>
