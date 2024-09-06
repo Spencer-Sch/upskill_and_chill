@@ -133,9 +133,7 @@ const Todo = async () => {
 				<ul className="space-y-3">
 					<Suspense fallback={<div>Loading...</div>}>
 						{tasks.map((task: Task) => (
-							<Task key={task.id} taskData={task} 
-							// deleteTask={deleteTask} 
-							/>
+							<Task key={task.id} taskData={task} />
 						))}
 					</Suspense>
 				</ul>
