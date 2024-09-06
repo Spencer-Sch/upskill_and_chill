@@ -22,7 +22,7 @@ const Task = ({
 		<li
 			className={`${getPriorityColor(priority)} p-5 bg-lightBlue rounded-md border-l-4 border-solid`}
 		>
-			<h3 className="text-lg font-bold">{taskName}</h3>
+			<h3 className="text-lg break-words">{taskName}</h3>
 			<p>{description}</p>
 			<div className="flex justify-between items-center w-full mt-3">
 				<p className="text-grey-500 italic">
