@@ -5,12 +5,10 @@ import { deleteTask } from '@/app/lib/actions'
 
 interface TaskProps {
 	taskData: Task
-	// deleteTask: (id: string) => void
 }
 
 const Task = ({
 	taskData: { taskName, description, id, priority, completed, createdAt },
-	// deleteTask,
 }: TaskProps) => {
 	const getPriorityColor = (priority: number) => {
 		const map: { [key: number]: string } = {
@@ -22,22 +20,17 @@ const Task = ({
 	}
 	return (
 		<li
-			className={`${getPriorityColor(priority)} p-5 bg-lightBlue rounded-md border-l-4 border-solid`}
+			className={`${getPriorityColor(priority)} max-w-[350px] min-w-[350px] p-5 bg-lightBlue rounded-md border-l-4 border-solid`}
 		>
-			<h3 className="text-lg font-bold">{taskName}</h3>
+			<h3 className="text-lg break-words">{taskName}</h3>
 			<p>{description}</p>
-			{/* <p>{completed.toString()}</p> */}
 			<div className="flex justify-between items-center w-full mt-3">
 				<p className="text-grey-500 italic">
 					{format(new Date(Number(createdAt)) ?? '', 'MM/dd/yyyy')}
 				</p>
 				<form action={deleteTask}>
 					<input hidden defaultValue={id ?? ''} name="taskId" />
-					<IconButton
-						icon={<Trash size={17} />}
-						ariaLabel="delete task"
-						// onClick={deleteTask}
-					/>
+					<IconButton icon={<Trash size={17} />} ariaLabel="delete task" />
 				</form>
 			</div>
 		</li>
