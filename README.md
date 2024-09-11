@@ -1,6 +1,6 @@
 # Upskill & Chill
 
-The official repo for the weekly Upskill and Chill stream on LinkedIn. A simple todo app built to explore the latest features and design patterns within the Next.js framework.
+TypeScript, Next.js, Tailwind, and Jest testing library powered project to explore the latest technologies and design patterns. The official repo of the Upskill & Chill stream on LinkedIn.
 
 ## Watch Previous Episodes
 
