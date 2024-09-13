@@ -2,11 +2,11 @@ export {}
 declare global {
 	type Task = {
 		taskName: string
-		description?: string
+		description: string | null
 		priority: number
 		createdAt?: string
 		// deadline?: string,
-		id?: string
+		id: string
 		completed: boolean
 	}
 	type PriorityOption = {
