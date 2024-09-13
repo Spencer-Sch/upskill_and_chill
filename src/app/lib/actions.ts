@@ -1,5 +1,10 @@
 'use server'
 import { revalidatePath } from 'next/cache'
+import { prisma } from '@/prisma/client'
+
+export const getTasks = async () => {
+  return await prisma.task.findMany()
+}
 
 export const addTask = async (formData: FormData) => {
   const data = await fetch('http://localhost:3000/api/task', {
