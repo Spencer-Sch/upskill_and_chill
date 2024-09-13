@@ -1,5 +1,4 @@
 'use client'
-import { Trash } from '@phosphor-icons/react'
+import { Trash, SpinnerGap } from '@phosphor-icons/react'
 
-export { Trash }
-
+export { Trash, SpinnerGap }
