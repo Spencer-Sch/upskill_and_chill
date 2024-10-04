@@ -2,15 +2,15 @@ import type { MetaFunction } from "@remix-run/node";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "Todo App" },
+    { name: "Upskill & Chill", content: "Welcome to Upskill & Chill!" },
   ];
 };
 
 export default function Index() {
   return (
     <div className="flex h-screen items-center justify-center">
-      <div className="flex flex-col items-center gap-16">
+      {/* <div className="flex flex-col items-center gap-16">
         <header className="flex flex-col items-center gap-9">
           <h1 className="leading text-2xl font-bold text-gray-800 dark:text-gray-100">
             Welcome to <span className="sr-only">Remix</span>
@@ -48,7 +48,7 @@ export default function Index() {
             ))}
           </ul>
         </nav>
-      </div>
+      </div> */}
     </div>
   );
 }
