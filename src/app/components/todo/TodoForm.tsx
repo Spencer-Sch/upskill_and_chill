@@ -10,7 +10,7 @@ const TodoForm = () => {
 	const [loading, setLoading] = useState(false)
 	const form = useRef<HTMLFormElement>(null)
 
-	console.log('loading: ', loading)
+	// console.log('loading: ', loading)
 
 	const handleSubmit = async (formData: FormData) => {
 		setLoading(true)
@@ -19,11 +19,22 @@ const TodoForm = () => {
 			form.current?.reset()
 		} catch (e) {
 			console.error(e)
+			setLoading(false)
+		} finally {
+			setLoading(false)
 		}
 	}
 
 	return (
-		<form ref={form} action={handleSubmit} className="flex flex-col space-y-5">
+		// <form ref={form} action={handleSubmit} className="flex flex-col space-y-5">
+		<form
+			ref={form}
+			onSubmit={(e) => {
+				e.preventDefault()
+				handleSubmit(new FormData(form.current!))
+			}}
+			className="flex flex-col space-y-5"
+		>
 			<TextInput inputName="taskName" label="Task" />
 			<TextInput
 				inputType="textarea"
@@ -51,4 +62,3 @@ const TodoForm = () => {
 }
 
 export default TodoForm
-
