@@ -1,7 +1,7 @@
 import { format } from 'date-fns'
-import { Trash } from '@/app/components/third-party/icons'
-import IconButton from '@/app/components/todo/IconButton'
-import { deleteTask } from '@/app/lib/actions'
+import { Trash } from '../third-party/icons'
+import IconButton from './IconButton'
+import { deleteTask } from '../../lib/actions'
 
 interface TaskProps {
 	taskData: Task
@@ -20,7 +20,9 @@ const Task = ({
 	}
 	return (
 		<li
-			className={`${getPriorityColor(priority)} max-w-[350px] min-w-[350px] p-5 bg-lightBlue rounded-md border-l-4 border-solid`}
+			className={`${getPriorityColor(
+				priority
+			)} max-w-[350px] min-w-[350px] p-5 bg-lightBlue rounded-md border-l-4 border-solid`}
 		>
 			<h3 className="text-lg break-words">{taskName}</h3>
 			<p>{description}</p>

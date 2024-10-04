@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { prisma } from '@/prisma/client'
+import { prisma } from '../../../prisma/client'
 // import { v4 } from 'uuid'
 import { randomUUID } from 'crypto'
 
@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
 		data: {
 			...body,
 			createdAt,
-			id
+			id,
 		},
 	})
 	return NextResponse.json(task, { status: 201 })

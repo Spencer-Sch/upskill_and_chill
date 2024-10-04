@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react'
 import Task from '../components/todo/Task'
-import { getTasks } from '@/app/lib/actions'
-import TodoForm from '@/app/components/todo/TodoForm'
+import { getTasks } from '../lib/actions'
+import TodoForm from '../components/todo/TodoForm'
 
 // const defaultTask: Task = {
 // 	id: '',
@@ -13,7 +13,6 @@ import TodoForm from '@/app/components/todo/TodoForm'
 // }
 
 const Todo = async () => {
-
 	const tasks = await getTasks()
 
 	return (
