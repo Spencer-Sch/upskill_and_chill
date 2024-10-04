@@ -1,10 +1,10 @@
 'use client'
 import { useRef, useState } from 'react'
-import { priorityOptions } from '@/app/constants/todo/constants'
-import TextInput from '@/app/components/todo/TextInput'
-import Button from '@/app/components/todo/Button'
-import { addTask } from '@/app/lib/actions'
-import { SpinnerGap } from '@/app/components/third-party/icons'
+import { priorityOptions } from '../../constants/todo/constants'
+import TextInput from './TextInput'
+import Button from './Button'
+import { addTask } from '../../lib/actions'
+import { SpinnerGap } from '../third-party/icons'
 
 const TodoForm = () => {
 	const [loading, setLoading] = useState(false)
