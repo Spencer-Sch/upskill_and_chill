@@ -1,7 +1,8 @@
-import { useFetcher } from "@remix-run/react";
+// import { useFetcher } from "@remix-run/react";
 // import { format } from 'date-fns'
 import { Trash } from "@phosphor-icons/react";
 import IconButton from "~/components/IconButton";
+import { useRevalidator } from "@remix-run/react";
 
 interface TaskProps {
   taskData: Task;
@@ -10,7 +11,8 @@ interface TaskProps {
 const Task = ({
   taskData: { taskName, description, id, priority, completed, createdAt },
 }: TaskProps) => {
-  const fetcher = useFetcher();
+  // const fetcher = useFetcher();
+  const revalidator = useRevalidator()
   const getPriorityColor = (priority: number) => {
     const map: { [key: number]: string } = {
       3: "border-red-500",
@@ -19,6 +21,14 @@ const Task = ({
     };
     return map[priority];
   };
+  const handleDelete = async () => {
+    const result = await fetch(`http://localhost:5173/api/todo/${id}`, {
+      method: 'DELETE',
+    })
+    const deletedTask = await result.json()
+    console.log(deletedTask)
+    revalidator.revalidate()
+  }
   return (
     <li
       className={`${getPriorityColor(
@@ -32,11 +42,11 @@ const Task = ({
           {/* {format(new Date(Number(createdAt)) ?? '', 'MM/dd/yyyy')} */}
         </p>
         {/* <form action={deleteTask}> */}
-        <fetcher.Form method="delete">
-          <input hidden defaultValue={id ?? ""} name="taskId" />
+        {/* <fetcher.Form method="delete">
+          <input hidden defaultValue={id ?? ""} name="taskId" /> */}
 
-          <IconButton icon={<Trash size={17} />} ariaLabel="delete task" />
-        </fetcher.Form>
+          <IconButton icon={<Trash size={17} />} ariaLabel="delete task" onClick={handleDelete} />
+        {/* </fetcher.Form> */}
         {/* </form> */}
       </div>
     </li>

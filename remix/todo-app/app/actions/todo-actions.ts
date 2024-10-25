@@ -20,11 +20,11 @@ export const createTask = async (data: FormData) => {
   return newTask;
 };
 
-export const deleteTask = async (data: FormData) => {
-  const taskId = String(data.get("taskId"));
+export const deleteTask = async (id: string) => {
+  if (id === '') return 'No id provided'
   const deletedTask = prisma.task.delete({
     where: {
-      id: taskId,
+      id,
     },
   });
   return deletedTask;
