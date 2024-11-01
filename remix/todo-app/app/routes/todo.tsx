@@ -16,8 +16,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   switch (request.method) {
     case "POST":
       return createTask(formData);
-    case "DELETE":
-      return deleteTask(formData);
+    // case "DELETE":
+    //   return deleteTask(formData);
   }
 };
 
