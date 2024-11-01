@@ -1,5 +1,6 @@
 // import { useRef, useState } from 'react'
-import { Form } from "@remix-run/react";
+// import { Form } from "@remix-run/react";
+import { useFetcher } from "@remix-run/react";
 import { priorityOptions } from "../constants/constants";
 import TextInput from "./TextInput";
 import Button from "./Button";
@@ -9,9 +10,14 @@ import Button from "./Button";
 const TodoForm = () => {
   // const [loading, setLoading] = useState(false)
   // const form = useRef<HTMLFormElement>(null)
+  const fetcher = useFetcher();
 
   return (
-    <Form className="flex flex-col space-y-5" method="post">
+    <fetcher.Form
+      className="flex flex-col space-y-5"
+      method="post"
+      action="/api/todo"
+    >
       <TextInput inputName="taskName" label="Task" />
       <TextInput
         inputType="textarea"
@@ -35,7 +41,7 @@ const TodoForm = () => {
         // icon={loading ? <SpinnerGap /> : null}
         // disabled={loading}
       />
-    </Form>
+    </fetcher.Form>
   );
 };
 
