@@ -7,6 +7,8 @@ import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import TodoForm from "../components/TodoForm";
 import { createTask, deleteTask } from "~/actions/todo-actions";
 import { authenticator } from "~/services/auth.server";
+import { supabase } from '../../supabase/client'
+import { Tables } from '../../database.types'
 
 // export async function loader({ request }: LoaderFunctionArgs) {
 // 	// If the user is already authenticated redirect to /dashboard directly
@@ -22,7 +24,12 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     failureRedirect: "/login",
   });
 
-  const tasks: Task[] = await prisma.task.findMany();
+  // const tasks: Task[] = await prisma.task.findMany();
+  const { data, error } = await supabase
+    .from('tasks')
+    .select()
+  if (error) throw error
+  const tasks: Tables<'tasks'>[] = data
   return json(tasks);
 };
 
