@@ -1,23 +1,32 @@
 import { randomUUID } from "crypto";
 import { prisma } from "../../prisma/client";
+import { supabase } from "../../supabase/client"
 
-export const createTask = async (data: FormData) => {
-  const taskName = String(data.get("taskName"));
-  const description = String(data.get("description"));
-  const priority = Number(data.get("priority"));
-  const createdAt = Date.now().toString();
-  const id = randomUUID();
-  const newTask = prisma.task.create({
-    data: {
+export const createTask = async (formData: FormData) => {
+  const taskName = String(formData.get("taskName"));
+  const description = String(formData.get("description"));
+  const priority = Number(formData.get("priority"));
+  // const createdAt = Date.now().toString();
+  // const id = randomUUID();
+  // const newTask = prisma.task.create({
+  //   data: {
+  //     taskName,
+  //     description,
+  //     priority,
+  //     id,
+  //     createdAt,
+  //     completed: false,
+  //   },
+  // });
+  const { data, error } = await supabase
+    .from('tasks')
+    .insert({
       taskName,
       description,
       priority,
-      id,
-      createdAt,
-      completed: false,
-    },
-  });
-  return newTask;
+    })
+  if (error) return { error }
+  return data;
 };
 
 export const deleteTask = async (id: string) => {
