@@ -41,17 +41,6 @@ export default function Todo() {
   const tasks = useLoaderData<typeof loader>();
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          padding: "12px",
-        }}
-      >
-        <Form method="POST">
-          <button>Log Out</button>
-        </Form>
-      </div>
       <div className="bg-primary-400 flex space-x-10 w-fit rounded-md">
         <div className="p-10">
           <TodoForm />
