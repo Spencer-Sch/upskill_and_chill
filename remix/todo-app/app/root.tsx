@@ -12,7 +12,7 @@ import type {
   ActionFunctionArgs,
   LoaderFunctionArgs,
 } from "@remix-run/node";
-import { authenticator, User } from "~/services/auth.server";
+import { authenticator } from "~/services/auth.server";
 
 import "./tailwind.css";
 import Header from "~/components/Header";
