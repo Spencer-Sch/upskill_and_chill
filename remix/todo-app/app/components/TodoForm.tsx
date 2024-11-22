@@ -25,8 +25,10 @@ const TodoForm = () => {
         label="Description"
       />
       <div className="flex flex-col">
-        <label htmlFor="priority">Priority</label>
-        <select id="priority" name="priority">
+        <label htmlFor="priority" className="text-orange font-bold">
+          Priority
+        </label>
+        <select id="priority" name="priority" className="common-input">
           {priorityOptions.map((item) => (
             <option key={item.value} value={item.value}>
               {item.label}

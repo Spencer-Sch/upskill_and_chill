@@ -2,3 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .button {
+    @apply flex justify-center items-center space-x-2 hover:bg-secondary-600 py-2 px-4 rounded-md bg-secondary-500;
+  }
+
+  .common-input {
+    @apply bg-gray-300 rounded-md text-primary-500 p-2;
+  }
+}

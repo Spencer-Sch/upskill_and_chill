@@ -1,5 +1,7 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { Form } from "@remix-run/react";
+import Button from "~/components/Button";
+import TextInput from "~/components/TextInput";
 import { authenticator } from "~/services/auth.server";
 
 // First, we can export a loader function where we check if the user is
@@ -31,18 +33,18 @@ export async function action({ request }: ActionFunctionArgs) {
 // names we are going to use in the strategy
 export default function Screen() {
   return (
-    <Form method="post">
-      <label htmlFor="email">Email</label>
-      <input type="email" name="email" id="email" required />
-      <label htmlFor="password">Password</label>
-      <input
-        type="password"
-        name="password"
-        id="password"
-        autoComplete="current-password"
+    <Form
+      method="post"
+      className="flex flex-col justify-center items-center bg-primary-400 space-y-10 p-10 w-fit rounded-md"
+    >
+      <TextInput inputName="email" label="Email" required />
+      <TextInput
+        inputName="password"
+        label="Password"
+        inputType="password"
         required
       />
-      <button>Sign In</button>
+      <Button label="Sign In" fullWidth />
     </Form>
   );
 }
