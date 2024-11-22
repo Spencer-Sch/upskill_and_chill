@@ -28,8 +28,8 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
   const { data, error } = await supabase
     .from('tasks')
     .select()
-  if (error) throw error
-  const tasks: Tables<'tasks'>[] = data
+  if (error) console.error(error)
+  const tasks: Tables<'tasks'>[] = data ?? []
   return json(tasks);
 };
 
