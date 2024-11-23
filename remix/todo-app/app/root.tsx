@@ -58,7 +58,6 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const { user } = useLoaderData<typeof loader>();
-  // console.log("root user: ", data.user);
 
   const userStatus = () => {
     if (user) {
