@@ -1,15 +1,6 @@
 import { Form, Link, NavLink, useLocation } from "@remix-run/react";
 import Button from "~/components/Button";
-
-const linksMap = new Map([
-  ["home", { label: "Home", path: "/" }],
-  ["todo-app", { label: "Todo App", path: "/todo" }],
-]);
-
-const links = Array.from(linksMap, ([key, { label, path }]) => ({
-  label,
-  path,
-}));
+import { links } from "~/constants/constants";
 
 export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
   const location = useLocation();
