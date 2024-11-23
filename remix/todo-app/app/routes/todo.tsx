@@ -1,21 +1,28 @@
 // import { Suspense } from "react";
 import { json } from "@remix-run/node";
 import { useLoaderData, useNavigation } from "@remix-run/react";
-// import { prisma } from "../../prisma/client";
 import Task from "../components/Task";
 import type { LoaderFunctionArgs } from "@remix-run/node";
 import TodoForm from "../components/TodoForm";
-import { authenticator } from "~/services/auth.server";
-import { supabase } from "../../supabase/client";
+// import { supabase } from "../../supabase/client";
 import { Tables } from "../../database.types";
+import { requireAuth } from "~/utils/auth.server";
+import { getAuthenticatedSupabaseClient } from "~/services/session.server";
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  await authenticator.isAuthenticated(request, {
-    failureRedirect: "/login",
-  });
+  const userId = await requireAuth(request);
+  const supabase = await getAuthenticatedSupabaseClient(request);
 
-  // const tasks: Task[] = await prisma.task.findMany();
-  // return tasks;
+  // Use authenticated client to fetch data
+  // const { data, error } = await supabase
+  //   .from("tasks")
+  //   .select("*")
+  //   .eq("user_id", userId);
+  //
+  // if (error) throw error;
+  //
+  // return json({ data });
+
   const { data, error } = await supabase.from("tasks").select();
   if (error) throw error;
   const tasks: Tables<"tasks">[] = data;

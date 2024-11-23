@@ -41,7 +41,7 @@ export async function getAuthenticatedSupabaseClient(request: Request) {
   return supabase;
 }
 
-// app/routes/_auth.login.tsx
+// app/routes/login.tsx
 import { json, redirect } from "@remix-run/node";
 import { Form, useActionData } from "@remix-run/react";
 import { sessionStorage, supabase } from "~/services/session.server";
@@ -127,13 +127,11 @@ export async function requireAuth(request: Request) {
 }
 
 // Example protected route
-// app/routes/dashboard.tsx
+// app/routes/todo.tsx
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import {
-  requireAuth,
-  getAuthenticatedSupabaseClient,
-} from "~/utils/auth.server";
+import { requireAuth } from "~/utils/auth.server";
+import { getAuthenticatedSupabaseClient } from "~/services/session.server";
 
 export const loader = async ({ request }) => {
   const userId = await requireAuth(request);

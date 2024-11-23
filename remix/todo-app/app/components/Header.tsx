@@ -54,7 +54,7 @@ export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
           </Link>
         )}
         {showLogoutButton && (
-          <Form method="post">
+          <Form method="post" action="/logout">
             <Button label="Log Out" type="submit" />
           </Form>
         )}
