@@ -1,5 +1,4 @@
 import {
-  json,
   Links,
   Meta,
   Outlet,
@@ -7,12 +6,12 @@ import {
   ScrollRestoration,
   useLoaderData,
 } from "@remix-run/react";
-import type {
-  LinksFunction,
-  ActionFunctionArgs,
-  LoaderFunctionArgs,
-} from "@remix-run/node";
-import { authenticator } from "~/services/auth.server";
+import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
+import {
+  getSession,
+  getAuthenticatedSupabaseClient,
+} from "~/services/session.server";
 
 import "./tailwind.css";
 import Header from "~/components/Header";
@@ -31,22 +30,38 @@ export const links: LinksFunction = () => [
 ];
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
-  const user = await authenticator.isAuthenticated(request, {
-    // failureRedirect: "/login",
-  });
+  const session = await getSession(request);
+  const accessToken = session.get("access_token");
+
+  if (!accessToken) {
+    return json({ user: null });
+  }
+
+  const supabase = await getAuthenticatedSupabaseClient(request);
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
+
+  if (error || !user) {
+    // Clear session if authentication fails
+    return redirect("/login", {
+      headers: {
+        "Set-Cookie": await sessionStorage.destroySession(session),
+      },
+    });
+  }
+  console.log("Root user: ", user);
+
   return json({ user });
 };
 
-export async function action({ request }: ActionFunctionArgs) {
-  await authenticator.logout(request, { redirectTo: "/login" });
-}
-
 export function Layout({ children }: { children: React.ReactNode }) {
-  const data = useLoaderData<typeof loader>();
+  const { user } = useLoaderData<typeof loader>();
   // console.log("root user: ", data.user);
 
   const userStatus = () => {
-    if (data.user) {
+    if (user) {
       return true;
     }
     return false;
