@@ -1,9 +1,53 @@
-import type { ActionFunctionArgs } from "@remix-run/node";
+import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
 import { Form } from "@remix-run/react";
-import { sessionStorage, supabase } from "~/services/session.server";
+import {
+  getSession,
+  sessionStorage,
+  supabase,
+} from "~/services/session.server";
 import Button from "~/components/Button";
 import TextInput from "~/components/TextInput";
+import { createClient } from "@supabase/supabase-js";
+
+export const loader = async ({ request }: LoaderFunctionArgs) => {
+  const session = await getSession(request);
+  const accessToken = session.get("access_token");
+
+  // If user has an access token, verify it's still valid
+  if (accessToken) {
+    const supabaseClient = createClient(
+      process.env.SUPABASE_URL!,
+      process.env.SUPABASE_ANON!
+    );
+
+    // Set the session to verify the token
+    supabaseClient.auth.setSession({
+      access_token: accessToken,
+      refresh_token: session.get("refresh_token"),
+    });
+
+    const {
+      data: { user },
+      error,
+    } = await supabaseClient.auth.getUser();
+
+    // If token is valid and user exists, redirect to todo page
+    if (!error && user) {
+      return redirect("/todo");
+    }
+
+    // If token is invalid, destroy the session
+    return redirect("/login", {
+      headers: {
+        "Set-Cookie": await sessionStorage.destroySession(session),
+      },
+    });
+  }
+
+  // If no token exists, allow access to login page
+  return json({ isAuthenticated: false });
+};
 
 export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
