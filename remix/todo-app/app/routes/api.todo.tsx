@@ -1,6 +1,6 @@
-import { ActionFunctionArgs } from "@remix-run/node";
-// import { prisma } from "../../prisma/client";
-import { createTask } from "~/actions/todo-actions";
+import { ActionFunctionArgs } from '@remix-run/node'
+// import { prisma } from "~/prisma/client";
+import { createTask } from '~/actions/todo-actions'
 
 // export const loader = async () => {
 //   const tasks: Task[] = await prisma.task.findMany();
@@ -8,6 +8,6 @@ import { createTask } from "~/actions/todo-actions";
 // };
 
 export const action = async ({ request }: ActionFunctionArgs) => {
-  const formData = await request.formData();
-  return createTask(formData);
-};
+	const formData = await request.formData()
+	return createTask(formData)
+}
