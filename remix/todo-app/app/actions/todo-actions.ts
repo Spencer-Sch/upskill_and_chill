@@ -1,6 +1,6 @@
 // import { randomUUID } from "crypto";
-import { prisma } from "../../prisma/client";
-import { supabase } from "../../supabase/client";
+import { prisma } from "~/prisma/client";
+import { supabase } from "~/supabase/client";
 
 export const createTask = async (formData: FormData) => {
   const taskName = String(formData.get("taskName"));

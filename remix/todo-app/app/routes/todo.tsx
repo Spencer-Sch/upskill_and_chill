@@ -1,11 +1,11 @@
 // import { Suspense } from "react";
 import { json } from "@remix-run/node";
 import { useLoaderData, useNavigation } from "@remix-run/react";
-import Task from "../components/Task";
+import Task from "~/components/Task";
 import type { LoaderFunctionArgs } from "@remix-run/node";
-import TodoForm from "../components/TodoForm";
-// import { supabase } from "../../supabase/client";
-import { Tables } from "../../database.types";
+import TodoForm from "~/components/TodoForm";
+// import { supabase } from "~/supabase/client";
+import { Tables } from "~/supabase/database.types";
 import { requireAuth } from "~/utils/auth.server";
 import { getAuthenticatedSupabaseClient } from "~/services/session.server";
 

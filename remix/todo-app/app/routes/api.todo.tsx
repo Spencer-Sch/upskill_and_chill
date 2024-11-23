@@ -1,5 +1,5 @@
 import { ActionFunctionArgs } from "@remix-run/node";
-// import { prisma } from "../../prisma/client";
+// import { prisma } from "~/prisma/client";
 import { createTask } from "~/actions/todo-actions";
 
 // export const loader = async () => {

@@ -1,7 +1,7 @@
 // import { useRef, useState } from 'react'
 // import { Form } from "@remix-run/react";
 import { useFetcher } from "@remix-run/react";
-import { priorityOptions } from "../constants/constants";
+import { priorityOptions } from "~/constants/constants";
 import TextInput from "./TextInput";
 import Button from "./Button";
 // import { addTask } from '../../lib/actions'
