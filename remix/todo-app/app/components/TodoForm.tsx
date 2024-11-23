@@ -16,7 +16,7 @@ const TodoForm = () => {
 		<fetcher.Form
 			className="flex flex-col space-y-5"
 			method="post"
-			action="/api/todo"
+			action="create"
 		>
 			<TextInput inputName="taskName" label="Task" />
 			<TextInput
