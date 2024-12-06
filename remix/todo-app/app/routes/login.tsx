@@ -1,8 +1,11 @@
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
+import { createCookieSessionStorage } from "@remix-run/node";
 import { Form } from "@remix-run/react";
 import Button from "~/components/Button";
 import TextInput from "~/components/TextInput";
 import { authenticator } from "~/services/auth.server";
+import { supabase } from '../../supabase/client'
+import { supaAuth } from '../../supabase/server'
 
 // First, we can export a loader function where we check if the user is
 // authenticated with `authenticator.isAuthenticated` and redirect to the
@@ -12,7 +15,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const user = await authenticator.isAuthenticated(request, {
     successRedirect: "/todo",
   });
-  console.log("user - login: ", user);
+  // console.log("user - login: ", user);
   return user;
 }
 
@@ -22,11 +25,29 @@ export async function action({ request }: ActionFunctionArgs) {
   // we call the method with the name of the strategy we want to use and the
   // request object, optionally we pass an object with the URLs we want the user
   // to be redirected to after a success or a failure
-  const loginRes = await authenticator.authenticate("user-pass", request, {
-    successRedirect: "/todo",
-  });
-  console.log("login Res: ", loginRes);
-  return loginRes;
+  // const loginRes = await authenticator.authenticate("user-pass", request, {
+  //   successRedirect: "/todo",
+  // });
+  // console.log("login Res: ", loginRes);
+  // return loginRes;
+  const formData = await request.formData()
+  const email = String(formData.get('email'))
+  const password = String(formData.get('password'))
+  const { data, error } = await supaAuth(request).auth.signInWithPassword({
+    email,
+    password,
+  })
+  // set cookies
+  const session = data.session
+  const sessionStorage = createCookieSessionStorage({
+    cookie: { 
+      name: 'upskill',
+      ...session
+  }})
+  console.log(sessionStorage)
+  console.log(data)
+  console.log(error)
+  return data
 }
 
 // Finally, we create our UI with the form doing a POST and the inputs with the
