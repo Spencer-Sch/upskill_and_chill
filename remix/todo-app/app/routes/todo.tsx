@@ -23,7 +23,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 	//
 	// return json({ data });
 
-	const { data, error } = await supabase.from('tasks').select()
+	const { data, error } = await supabase.from('tasks').select('*').eq('user_id', userId)
 	if (error) throw error
 	const tasks: Tables<'tasks'>[] = data
 	return json(tasks)

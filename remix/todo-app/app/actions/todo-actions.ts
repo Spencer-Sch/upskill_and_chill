@@ -1,8 +1,9 @@
 // import { randomUUID } from "crypto";
 import { prisma } from '~/prisma/client'
-import { supabase } from '~/supabase/client'
+// import { supabase } from '~/supabase/client'
 
-export const createTask = async (formData: FormData) => {
+export const createTask = async (formData: FormData, supabase: any) => {
+	const { data: { user } } = await supabase.auth.getUser()
 	const taskName = String(formData.get('taskName'))
 	const description = String(formData.get('description'))
 	const priority = Number(formData.get('priority'))
@@ -23,6 +24,7 @@ export const createTask = async (formData: FormData) => {
 		taskName,
 		description,
 		priority,
+		user_id: user.id
 	})
 	if (error) return { error }
 	return data
