@@ -1,7 +1,7 @@
 import { Authenticator } from "remix-auth";
 import { FormStrategy } from "remix-auth-form";
 import { sessionStorage } from "~/services/session.server";
-import { supabase } from '../../supabase/client';
+// import { supabase } from '../../supabase/client';
 
 type User = {
   email: string;
