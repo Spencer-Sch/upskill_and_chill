@@ -1,10 +1,11 @@
 import { createCookieSessionStorage } from '@remix-run/node'
 import { createClient } from '@supabase/supabase-js'
+import type { Database } from '~/supabase/database.types'
 
 const supabaseUrl = process.env.SUPABASE_URL!
 const supabaseAnonKey = process.env.SUPABASE_ANON!
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey)
 
 // Create session storage
 export const sessionStorage = createCookieSessionStorage({
