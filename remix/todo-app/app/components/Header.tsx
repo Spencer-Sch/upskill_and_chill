@@ -5,11 +5,9 @@ import { links } from '~/constants/constants'
 export default function Header({ isLoggedIn }: { isLoggedIn: boolean }) {
 	const location = useLocation()
 
-	const showLoginButton =
-		location.pathname === '/login' || isLoggedIn ? false : true
+	const showLoginButton = location.pathname !== '/login' && !isLoggedIn
 
-	const showLogoutButton =
-		location.pathname === '/login' || !isLoggedIn ? false : true
+	const showLogoutButton = location.pathname !== '/login' && isLoggedIn
 
 	return (
 		<header className="flex justify-between items-center p-8 bg-primary-500">
