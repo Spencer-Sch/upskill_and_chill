@@ -41,7 +41,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 		})
 	}
 
-	// If no token exists, allow access to login page
+	// If no token exists, allow access to register page
 	return json({ isAuthenticated: false })
 }
 
@@ -50,7 +50,7 @@ export async function action({ request }: ActionFunctionArgs) {
 	const email = formData.get('email')
 	const password = formData.get('password')
 
-	const { data, error } = await supabase.auth.signInWithPassword({
+	const { data, error } = await supabase.auth.signUp({
 		email: String(email),
 		password: String(password),
 	})
@@ -80,7 +80,7 @@ export default function Screen() {
 	return (
 		<Form
 			method="post"
-			className="flex flex-col justify-center items-center bg-primary-400 space-y-10 p-10 w-fit rounded-md"
+			className="flex flex-col justify-center items-center space-y-10"
 		>
 			<TextInput inputName="email" label="Email" required />
 			<TextInput
@@ -89,7 +89,7 @@ export default function Screen() {
 				inputType="password"
 				required
 			/>
-			<Button label="Sign In" fullWidth />
+			<Button label="Register" fullWidth />
 		</Form>
 	)
 }
