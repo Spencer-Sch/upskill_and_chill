@@ -80,7 +80,7 @@ export default function Screen() {
 	return (
 		<Form
 			method="post"
-			className="flex flex-col justify-center items-center bg-primary-400 space-y-10 p-10 w-fit rounded-md"
+			className="flex flex-col justify-center items-center space-y-10"
 		>
 			<TextInput inputName="email" label="Email" required />
 			<TextInput
