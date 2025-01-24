@@ -1,7 +1,20 @@
 'use client'
 import { ChangeEvent } from 'react'
 
-interface TextInputProps {
+// interface TextInputProps {
+// 	inputName: string
+// 	label: string
+// 	value?: string
+// 	placeholder?: string
+// 	// styles?: string
+// 	inputType?: 'text' | 'textarea' | 'password' | 'email'
+// 	required?: boolean
+// 	onChangeCallback?: (
+// 		e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+// 	) => void
+// }
+
+type TextInputProps = {
 	inputName: string
 	label: string
 	value?: string
@@ -12,7 +25,7 @@ interface TextInputProps {
 	onChangeCallback?: (
 		e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
 	) => void
-}
+} & React.InputHTMLAttributes<HTMLInputElement>
 
 const TextInput = ({
 	inputName,
@@ -23,6 +36,7 @@ const TextInput = ({
 	inputType = 'text',
 	required,
 	onChangeCallback,
+	...rest
 }: TextInputProps) => {
 	return (
 		<div className="flex flex-col">
@@ -40,6 +54,7 @@ const TextInput = ({
 					required={required}
 					rows={8}
 					cols={15}
+					{...rest}
 				/>
 			) : (
 				<input
@@ -51,6 +66,7 @@ const TextInput = ({
 					type={inputType}
 					placeholder={placeholder}
 					required={required}
+					{...rest}
 				/>
 			)}
 		</div>
