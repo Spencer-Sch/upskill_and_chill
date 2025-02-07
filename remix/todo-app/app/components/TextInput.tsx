@@ -22,10 +22,10 @@ type TextInputProps = {
 	// styles?: string
 	inputType?: 'text' | 'textarea' | 'password' | 'email'
 	required?: boolean
-	onChangeCallback?: (
-		e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
-	) => void
-} & React.InputHTMLAttributes<HTMLInputElement>
+	// onChangeCallback?: (
+	// 	e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+	// ) => void
+} & React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement>
 
 const TextInput = ({
 	inputName,
@@ -35,7 +35,7 @@ const TextInput = ({
 	// styles,
 	inputType = 'text',
 	required,
-	onChangeCallback,
+	// onChangeCallback,
 	...rest
 }: TextInputProps) => {
 	return (
@@ -49,7 +49,7 @@ const TextInput = ({
 					id={inputName}
 					value={value}
 					className="common-input"
-					onChange={onChangeCallback}
+					// onChange={onChangeCallback}
 					placeholder={placeholder}
 					required={required}
 					rows={8}
@@ -62,7 +62,7 @@ const TextInput = ({
 					id={inputName}
 					value={value}
 					className="common-input"
-					onChange={onChangeCallback}
+					// onChange={onChangeCallback}
 					type={inputType}
 					placeholder={placeholder}
 					required={required}

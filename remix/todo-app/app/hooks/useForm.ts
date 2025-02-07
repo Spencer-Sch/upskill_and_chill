@@ -3,7 +3,7 @@ import { z } from 'zod'
 import type { FieldValues, FieldErrors, FormState } from '~/types/types'
 
 export function useForm<T extends FieldValues>(options: {
-	schema: z.ZodType<T>
+	schema: z.ZodObject<z.ZodRawShape, any, T>
 	defaultValues?: Partial<T>
 }) {
 	const [formState, setFormState] = useState<FormState<T>>({
