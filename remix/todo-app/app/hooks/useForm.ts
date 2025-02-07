@@ -17,7 +17,6 @@ export function useForm<T extends FieldValues>(options: {
 	const validateField = useCallback(
 		(name: keyof T, value: any) => {
 			try {
-				// const fieldSchema = options.schema.
 				const fieldSchema = options.schema.shape[name]
 				fieldSchema.parse(value)
 				return []
